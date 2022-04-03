@@ -1,15 +1,16 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Form = () => {
     const [value, setValue] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleChange = (e) => (setValue(e.target.value));
+    const handleChange = (e) => setValue(e.target.value);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate(`/${value}`);
+        navigate(`/${value}`, { state: {value: `${value}`} });
     };
 
     return (

@@ -1,16 +1,27 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
 const ResultPage = () => {
     const [data, setData] = useState("");
     const { wordToSearch } = useParams();
+    const { state } = useLocation();
+
+    // if (state.value !== null) {
+    //     console.log(state.value);
+    // }
+
 
     const fetchData = async (url) => {
+
+        // setData(state.value);
+
         try {
             const res = await fetch(`${url}/${wordToSearch}`);
             const data = await res.json();
+
+
             setData(data);
 
         } catch (e) {
@@ -32,7 +43,7 @@ const ResultPage = () => {
         </main>
     ) : (
         <main>
-            <p>RESULT</p>
+            <p>RESULT for {data.word}</p>
         </main>
     );
 };
