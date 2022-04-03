@@ -1,7 +1,10 @@
 import React, {useState} from "react";
+
 import { useNavigate } from "react-router-dom";
 
-const Form = () => {
+const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
+
+const SearchPage = () => {
     const [value, setValue] = useState("");
     const navigate = useNavigate();
 
@@ -20,4 +23,4 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default SearchPage;

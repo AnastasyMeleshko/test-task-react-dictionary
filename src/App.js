@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage/HomePage";
 import ResultPage from "./components/ResultPage/ResultPage";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 const App = () => {
     return (
@@ -14,7 +15,7 @@ const App = () => {
             <br/>
             <Routes>
                 <Route path="/" element={<HomePage/>}/>
-                <Route path="/res" element={<ResultPage/>}/>
+                <Route path="/:wordToSearch" element={<ResultPage/>}/>
             </Routes>
             <br/>
             <br/>

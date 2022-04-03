@@ -1,24 +1,38 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+
+const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
 const ResultPage = () => {
-    const location = useLocation();
-    const searchData = location.state.data;
-    console.log(searchData);
+    const [data, setData] = useState("");
+    const { wordToSearch } = useParams();
 
-    // console.log({location});
-    // console.log(props);
-    // console.log(location.state.data);
+    const fetchData = async (url) => {
+        try {
+            const res = await fetch(`${url}/${wordToSearch}`);
+            const data = await res.json();
+            setData(data);
 
-    return (typeof searchData.title !== "undefined") ? (
+        } catch (e) {
+            console.dir(e);
+        }
+    };
+
+    useEffect(() => {
+        fetchData(url);
+    },[]);
+
+    console.log(data);
+
+    return (typeof data.title !== "undefined") ? (
         <main>
-            <p>{searchData.title}</p>
-            <p>{searchData.message}</p>
-            <p>{searchData.resolution}</p>
+            <p>{data.title}</p>
+            <p>{data.message}</p>
+            <p>{data.resolution}</p>
         </main>
     ) : (
         <main>
-            <p>{searchData[0].word}</p>
+            <p>RESULT</p>
         </main>
     );
 };
