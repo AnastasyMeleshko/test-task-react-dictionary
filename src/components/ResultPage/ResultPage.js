@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
@@ -8,10 +9,13 @@ const ResultPage = () => {
     const { wordToSearch } = useParams();
     const { state } = useLocation();
 
+    console.log({wordToSearch});
+
     // if (state.value !== null) {
     //     console.log(state.value);
     // }
 
+    // console.log(`state.value - ${state.value}  `);
 
     const fetchData = async (url) => {
 
@@ -19,10 +23,8 @@ const ResultPage = () => {
 
         try {
             const res = await fetch(`${url}/${wordToSearch}`);
-            const data = await res.json();
-
-
-            setData(data);
+            const newData = await res.json();
+            setData(newData);
 
         } catch (e) {
             console.dir(e);
@@ -37,13 +39,17 @@ const ResultPage = () => {
 
     return (typeof data.title !== "undefined") ? (
         <main>
-            <p>{data.title}</p>
-            <p>{data.message}</p>
-            <p>{data.resolution}</p>
+            <Container>
+                <p>{data.title}</p>
+                <p>{data.message}</p>
+                <p>{data.resolution}</p>
+            </Container>
         </main>
     ) : (
         <main>
-            <p>RESULT for {data.word}</p>
+            <Container>
+                <p>RESULT --- </p>
+            </Container>
         </main>
     );
 };
