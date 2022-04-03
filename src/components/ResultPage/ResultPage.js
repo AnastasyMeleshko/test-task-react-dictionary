@@ -60,7 +60,7 @@ const ResultPage = () => {
         <main>
             <Container>
                 <p>Searching word is: <span>{data[0].word}</span></p>
-                <p>Phonetic: <span>{data[0].phonetic}</span></p>
+                <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p>
                 <ReactAudioPlayer
                     src={
                         data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
