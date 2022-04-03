@@ -24,7 +24,7 @@ const ResultPage = () => {
         try {
             const res = await fetch(`${url}/${wordToSearch}`);
             const newData = await res.json();
-            setData(newData);
+            setData(newData.data);
 
         } catch (e) {
             console.dir(e);

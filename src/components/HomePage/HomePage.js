@@ -7,7 +7,7 @@ const HomePage = () => {
     return (
         <main>
             <Container fluid="md d-flex justify-content-center">
-                <Image src={imagePath} height="350" class="img-fluid d-flex" alt="main-picture"/>
+                <Image src={imagePath} height="200" maxWidth="100%" className="d-flex" alt="main-picture"/>
             </Container>
         </main>
     );

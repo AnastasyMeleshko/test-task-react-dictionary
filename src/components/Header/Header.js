@@ -17,8 +17,8 @@ const Header = () => {
     return (
         <header>
             <Container fluid="md">
-                <nav className="p-5">
-                    <ul className="nav nav-pills nav-fill">
+                <nav className="header-nav">
+                    <ul className="nav nav-pills nav-fill pt-3">
                         <li className="nav-item">
                             <button onClick={handlePrevClick} type="button" className="btn btn-outline-primary">Back</button>
                         </li>
