@@ -1,34 +1,24 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams , useNavigate} from "react-router-dom";
 import { Container } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
+import axios from "axios";
 
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
 const ResultPage = () => {
     const [data, setData] = useState([]);
     const { wordToSearch } = useParams();
-    const { state } = useLocation();
-
-    console.log({wordToSearch});
-
-    // if (state.value !== null) {
-    //     console.log(state.value);
-    // }
-
-    // console.log(`state.value - ${state.value}  `);
+    const navigate = useNavigate();
 
     const fetchData = async (url) => {
-
-        // setData(state.value);
-
         try {
-            const res = await fetch(`${url}/${wordToSearch}`);
-            const newData = await res.json();
-            setData(newData);
-
+            const response = await axios.get(`${url}/${wordToSearch}`);
+            setData(response.data);
+            console.log(response.data);
         } catch (e) {
             console.dir(e);
+            navigate("/notfound");
         }
     };
 
@@ -37,16 +27,6 @@ const ResultPage = () => {
     },[]);
 
     console.log(data);
-
-    // let meanings;
-    // if (data.title !== "undefined") {
-    //     meanings = {};
-    // } else {
-    //     meanings = data[0];
-    //     console.log(meanings);
-    // }
-    //
-    // console.log(meanings);
 
     return (typeof data.title !== "undefined") ? (
         <main>

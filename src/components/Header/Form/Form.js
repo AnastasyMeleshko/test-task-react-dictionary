@@ -1,30 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-
-// const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
     const [value, setValue] = useState("");
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handleChange = (e) => setValue(e.target.value);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // try {
-        //     const res = await fetch(`${url}/${value}`);
-        //     const newData = await res.json();
-        //     if (typeof newData["word"] !== "undefined") {
-        //         setValue(value);
-        //     }
-        //
-        // } catch (e) {
-        //     console.dir(e);
-        // }
-
-        navigate(`/${value}`, { state: {value: `${value}`} });
+        navigate(`/${value}`);
     };
 
     return (

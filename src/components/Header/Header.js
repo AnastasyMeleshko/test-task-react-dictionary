@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Form from "./Form/Form";
 import {Container} from "react-bootstrap";
 
 const Header = () => {
@@ -32,7 +31,6 @@ const Header = () => {
                         </li>
                     </ul>
                 </nav>
-                <Form/>
             </Container>
         </header>
     );

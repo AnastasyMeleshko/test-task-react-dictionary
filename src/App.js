@@ -8,7 +8,8 @@ import HomePage from "./components/HomePage/HomePage";
 import ResultPage from "./components/ResultPage/ResultPage";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import SearchPage from "./components/SearchPage/SearchPage";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
+
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/:wordToSearch" element={<ResultPage/>}/>
+                    <Route path="/notfound" element={<ErrorPage/>}/>
                 </Routes>
             </div>
             <Footer/>
