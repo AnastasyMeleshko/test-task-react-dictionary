@@ -31,8 +31,8 @@ const ResultPage = () => {
     return (data.length > 0) ? (
         <main>
             <Container fluid="md d-flex justify-content-center flex-column">
-                <p className="mt-lg-5 mt-md-5 mt-sm-5 mt-5">Searching word is: <span>{data[0].word}</span></p>
-                <p>Phonetic: <span>{data[0].phonetics.text ? data[0].phonetics.text : ""}</span></p>
+                <p className="mt-lg-5 mt-md-5 mt-sm-5 mt-5">{data[0].word}</p>
+                <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p>
                 <ReactAudioPlayer
                     src={
                         data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
@@ -40,42 +40,27 @@ const ResultPage = () => {
                     }
                     controls
                 />
-                <p>Meanings:</p>
-                {data.map((elem,index) => {
+                {data.map((elem,index) =>
                     <Fragment key={index}>
-                        {elem.meanings.map((newItem, index) => {
+                        {elem.meanings.map((meaning, index) =>
                             <Fragment key={index}>
-                                <p>{newItem.partOfSpeech}</p>
-                                console.log(newItem)
-                                {/*{newItem.partOfSpeech.map((elem,index) => {*/}
-                                {/*    <Fragment key={index}>*/}
-                                {/*        <p>{elem.definition}</p>*/}
-                                {/*    </Fragment>;*/}
-                                {/*})}*/}
-                            </Fragment>;
-                        })}
-                    </Fragment>;
-                })};
-                {/*// <Fragment key={index}>*/}
-                {/*//     <hr className="mt-2 mb-3"/>*/}
-                {/*//     {elem.meanings.map((meaning) => {*/}
-                {/*//         console.log(meaning[0]);*/}
-                {/*//     }*/}
-                {/*        // <Card bg="primary" key={idx} text="white" style={{ width: '18rem' }} className="mb-2">*/}
-                {/*        //     <Card.Header>{meaning}</Card.Header>*/}
-                {/*        //     <Card.Body>*/}
-                {/*        //         <Card.Title>{variant} Card Title </Card.Title>*/}
-                {/*        //         <Card.Text>*/}
-                {/*        //             Some quick example text to build on the card title and make up the bulk*/}
-                {/*        //             of the card's content.*/}
-                {/*        //         </Card.Text>*/}
-                {/*        //     </Card.Body>*/}
-                {/*        // </Card>*/}
-                {/*//     )};*/}
-                {/*// </Fragment>;*/}
-                {/*// })}*/}
+                                <hr/>
+                                <h5>{meaning.partOfSpeech}</h5>
+                                {meaning.definitions.map((definition,ind) =>
+                                    <Fragment key={ind}>
+                                        <p><b>Definition {ind+1}:</b> {definition.definition}</p>
+                                        {definition.example ? <p><b>Example:</b> <i>{definition.example}</i></p> : ""}
+                                    </Fragment>
+                                )}
+                                {meaning.synonyms[0] ? <p><b><i>Synonyms: </i></b><i>{meaning.synonyms.join(", ")}</i></p> : <p><b><i>Synonyms: </i></b><i>Not found</i></p>}
+                                {meaning.antonyms[0] ? <p><b><i>Antonyms: </i></b><i>{meaning.antonyms.join(", ")}</i></p> : <p><b><i>Antonyms: </i></b><i>Not found</i></p>}
+                            </Fragment>
+                        )}
+                    </Fragment>
+                )}
             </Container>
         </main>
     ) : "";
 };
+
 export default ResultPage;
