@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useParams , useNavigate} from "react-router-dom";
-import { Container, Spinner } from "react-bootstrap";
+import { Container, Spinner, Badge } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
 import "./ResultPage.css";
@@ -45,6 +45,7 @@ const ResultPage = () => {
     return (data.length > 0) ? (
         <main>
             <Container fluid="md d-flex justify-content-center flex-column">
+                {/*<Badge bg="success mt-lg-5 mt-md-5 mt-sm-5 mt-5 mb-2">{data[0].word}</Badge>*/}
                 <p className="mt-lg-5 mt-md-5 mt-sm-5 mt-5">{data[0].word}</p>
                 {data[0].phonetic ?
                     <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p> :
@@ -69,8 +70,10 @@ const ResultPage = () => {
                                         {definition.example ? <p><b>Example:</b> <i>{definition.example}</i></p> : ""}
                                     </Fragment>
                                 )}
-                                {meaning.synonyms[0] ? <p><b><i>Synonyms: </i></b><i>{meaning.synonyms.join(", ")}</i></p> : <p><b><i>Synonyms: </i></b><i>Not found</i></p>}
-                                {meaning.antonyms[0] ? <p><b><i>Antonyms: </i></b><i>{meaning.antonyms.join(", ")}</i></p> : <p><b><i>Antonyms: </i></b><i>Not found</i></p>}
+                                {meaning.synonyms[0] ? <p><b><i><Badge bg="success mr-4">Synonyms:</Badge></i></b><i>  {meaning.synonyms.join(", ")}</i></p>
+                                    : <p><b><i><Badge bg="danger mr-2">Synonyms:</Badge></i></b><i>  Not found</i></p>}
+                                {meaning.antonyms[0] ? <p><b><i><Badge bg="success mr-4">Antonyms:</Badge></i></b><i>  {meaning.antonyms.join(", ")}</i></p>
+                                    : <p><b><i><Badge bg="danger mr-2">Antonyms:</Badge></i></b><i>  Not found</i></p>}
                             </Fragment>
                         )}
                     </Fragment>
