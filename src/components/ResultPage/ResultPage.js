@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {useParams , useNavigate} from "react-router-dom";
 import { Container } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
@@ -28,30 +28,54 @@ const ResultPage = () => {
 
     console.log(data);
 
-    return (typeof data.title !== "undefined") ? (
+    return (data.length > 0) ? (
         <main>
-            <Container>
-                <p>{data.title}</p>
-                <p>{data.message}</p>
-                <p>{data.resolution}</p>
-            </Container>
-        </main>
-    ) : (data.length > 0) ? (
-        <main>
-            <Container>
-                <p>Searching word is: <span>{data[0].word}</span></p>
-                <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p>
+            <Container fluid="md d-flex justify-content-center flex-column">
+                <p className="mt-lg-5 mt-md-5 mt-sm-5 mt-5">Searching word is: <span>{data[0].word}</span></p>
+                <p>Phonetic: <span>{data[0].phonetics.text ? data[0].phonetics.text : ""}</span></p>
                 <ReactAudioPlayer
                     src={
                         data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
-                            data[0].phonetics[1].audio : data[0].phonetics[2].audio
+                            data[0].phonetics[1].audio : data[0].phonetics[2].audio ? data[0].phonetics[2].audio : " "
                     }
                     controls
                 />
                 <p>Meanings:</p>
+                {data.map((elem,index) => {
+                    <Fragment key={index}>
+                        {elem.meanings.map((newItem, index) => {
+                            <Fragment key={index}>
+                                <p>{newItem.partOfSpeech}</p>
+                                console.log(newItem)
+                                {/*{newItem.partOfSpeech.map((elem,index) => {*/}
+                                {/*    <Fragment key={index}>*/}
+                                {/*        <p>{elem.definition}</p>*/}
+                                {/*    </Fragment>;*/}
+                                {/*})}*/}
+                            </Fragment>;
+                        })}
+                    </Fragment>;
+                })};
+                {/*// <Fragment key={index}>*/}
+                {/*//     <hr className="mt-2 mb-3"/>*/}
+                {/*//     {elem.meanings.map((meaning) => {*/}
+                {/*//         console.log(meaning[0]);*/}
+                {/*//     }*/}
+                {/*        // <Card bg="primary" key={idx} text="white" style={{ width: '18rem' }} className="mb-2">*/}
+                {/*        //     <Card.Header>{meaning}</Card.Header>*/}
+                {/*        //     <Card.Body>*/}
+                {/*        //         <Card.Title>{variant} Card Title </Card.Title>*/}
+                {/*        //         <Card.Text>*/}
+                {/*        //             Some quick example text to build on the card title and make up the bulk*/}
+                {/*        //             of the card's content.*/}
+                {/*        //         </Card.Text>*/}
+                {/*        //     </Card.Body>*/}
+                {/*        // </Card>*/}
+                {/*//     )};*/}
+                {/*// </Fragment>;*/}
+                {/*// })}*/}
             </Container>
         </main>
     ) : "";
 };
-
 export default ResultPage;
