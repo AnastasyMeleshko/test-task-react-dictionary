@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useParams , useNavigate} from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
 
@@ -10,14 +10,21 @@ const ResultPage = () => {
     const [data, setData] = useState([]);
     const { wordToSearch } = useParams();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     const fetchData = async (url) => {
         try {
             const response = await axios.get(`${url}/${wordToSearch}`);
             setData(response.data);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
             console.log(response.data);
         } catch (e) {
             console.dir(e);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
             navigate("/notfound");
         }
     };
@@ -26,20 +33,25 @@ const ResultPage = () => {
         fetchData(url);
     },[]);
 
-    console.log(data);
+    if (loading) return <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+    </Spinner>;
 
     return (data.length > 0) ? (
         <main>
             <Container fluid="md d-flex justify-content-center flex-column">
                 <p className="mt-lg-5 mt-md-5 mt-sm-5 mt-5">{data[0].word}</p>
-                <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p>
-                <ReactAudioPlayer
-                    src={
-                        data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
-                            data[0].phonetics[1].audio : data[0].phonetics[2].audio ? data[0].phonetics[2].audio : " "
-                    }
-                    controls
-                />
+                {data[0].phonetic ?
+                    <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p> :
+                    <p>Phonetic: <span><i>Transcription not found</i></span></p>}
+                {(data[0].phonetics[0]) ?
+                    <ReactAudioPlayer
+                        src={
+                            data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
+                                data[0].phonetics[1].audio : data[0].phonetics[2].audio ? data[0].phonetics[2].audio : " "
+                        }
+                        controls
+                    /> : ""}
                 {data.map((elem,index) =>
                     <Fragment key={index}>
                         {elem.meanings.map((meaning, index) =>
