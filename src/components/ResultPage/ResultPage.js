@@ -35,7 +35,7 @@ const ResultPage = () => {
     },[]);
 
     if (loading) return <main>
-        <Container fluid="md d-flex justify-content-center flex-column" className="spinner-container">
+        <Container fluid="md sm d-flex justify-content-center flex-column" className="spinner-container">
             <Spinner animation="border" role="status" className="spinner-element">
                 <span className="visually-hidden">Loading...</span>
             </Spinner>
@@ -44,7 +44,7 @@ const ResultPage = () => {
 
     return (data.length > 0) ? (
         <main>
-            <Container fluid="md d-flex justify-content-center flex-column">
+            <Container fluid="md sm d-flex justify-content-center flex-column">
                 <div className="mt-lg-4 mt-md-4 mt-sm-2 mt-2 d-flex justify-content-center">
                     <span className="badge bg-info text-dark m-3 p-3 word-text">{data[0].word.toUpperCase()}</span>
                 </div>
@@ -63,7 +63,7 @@ const ResultPage = () => {
                     </div> : ""}
 
                 <div className="scroll-results mt-lg-4 mt-md-4 mt-sm-2 mt-2">
-                    <Container fluid="md d-flex justify-content-center flex-column" className="search-wrap">
+                    <Container fluid="md sm d-flex justify-content-center flex-column" className="search-wrap">
                         {data.map((elem,index) =>
                             <Fragment key={index}>
                                 {elem.meanings.map((meaning, index) =>

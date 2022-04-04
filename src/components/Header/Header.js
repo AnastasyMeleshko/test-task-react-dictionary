@@ -15,7 +15,7 @@ const Header = () => {
 
     return (
         <header>
-            <Container fluid="md">
+            <Container fluid="md sm">
                 <nav className="header-nav">
                     <ul className="nav nav-pills nav-fill pt-3">
                         <li className="nav-item">

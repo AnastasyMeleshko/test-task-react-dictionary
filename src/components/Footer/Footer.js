@@ -6,7 +6,7 @@ import "./Footer.css";
 const Footer = () => {
     return (
         <footer className="text-white py-4 footer-main">
-            <Container>
+            <Container fluid="md sm">
                 <p className="d-flex justify-content-center text-xs-center">
                     &copy; {new Date().getFullYear()} Anastasya Meleshko &#10084;
                 </p>
