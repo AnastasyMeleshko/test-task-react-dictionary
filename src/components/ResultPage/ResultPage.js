@@ -3,6 +3,7 @@ import {useParams , useNavigate} from "react-router-dom";
 import { Container, Spinner } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
 import axios from "axios";
+import "./ResultPage.css";
 
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
@@ -24,8 +25,8 @@ const ResultPage = () => {
             console.dir(e);
             setTimeout(() => {
                 setLoading(false);
-            }, 1000);
-            navigate("/notfound");
+                navigate("/notfound");
+            }, 1500);
         }
     };
 
@@ -33,9 +34,13 @@ const ResultPage = () => {
         fetchData(url);
     },[]);
 
-    if (loading) return <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-    </Spinner>;
+    if (loading) return <main>
+        <Container fluid="md d-flex justify-content-center flex-column" className="spinner-container">
+            <Spinner animation="border" role="status" className="spinner-element">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
+        </Container>
+    </main>;
 
     return (data.length > 0) ? (
         <main>
