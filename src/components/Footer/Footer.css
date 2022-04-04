@@ -2,7 +2,7 @@ footer {
     width: 100%;
     flex-shrink: 0;
     position: absolute;
-    bottom: var(--footer-height);
+    bottom: 0;
 }
 
 .footer-main {

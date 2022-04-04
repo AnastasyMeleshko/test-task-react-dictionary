@@ -45,39 +45,48 @@ const ResultPage = () => {
     return (data.length > 0) ? (
         <main>
             <Container fluid="md d-flex justify-content-center flex-column">
-                {/*<Badge bg="success mt-lg-5 mt-md-5 mt-sm-5 mt-5 mb-2">{data[0].word}</Badge>*/}
-                <p className="mt-lg-5 mt-md-5 mt-sm-5 mt-5">{data[0].word}</p>
+                <div className="mt-lg-4 mt-md-4 mt-sm-2 mt-2 d-flex justify-content-center">
+                    <span className="badge bg-info text-dark m-3 p-3 word-text">{data[0].word.toUpperCase()}</span>
+                </div>
                 {data[0].phonetic ?
-                    <p>Phonetic: <span>{data[0].phonetic ? data[0].phonetic : ""}</span></p> :
-                    <p>Phonetic: <span><i>Transcription not found</i></span></p>}
+                    <p className="d-flex justify-content-center"><b>Phonetic: </b><span>{data[0].phonetic ? data[0].phonetic : ""}</span></p> :
+                    <p className="d-flex justify-content-center"><b>Phonetic: </b><span><i>Transcription not found</i></span></p>}
                 {(data[0].phonetics[0]) ?
-                    <ReactAudioPlayer
-                        src={
-                            data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
-                                data[0].phonetics[1].audio : data[0].phonetics[2].audio ? data[0].phonetics[2].audio : " "
-                        }
-                        controls
-                    /> : ""}
-                {data.map((elem,index) =>
-                    <Fragment key={index}>
-                        {elem.meanings.map((meaning, index) =>
+                    <div className="d-flex justify-content-center mt-3 mb-3">
+                        <ReactAudioPlayer
+                            src={
+                                data[0].phonetics[0].audio ? data[0].phonetics[0].audio : data[0].phonetics[1].audio ?
+                                    data[0].phonetics[1].audio : data[0].phonetics[2].audio ? data[0].phonetics[2].audio : " "
+                            }
+                            controls
+                        />
+                    </div> : ""}
+
+                <div className="scroll-results mt-lg-4 mt-md-4 mt-sm-2 mt-2">
+                    <Container fluid="md d-flex justify-content-center flex-column" className="search-wrap">
+                        {data.map((elem,index) =>
                             <Fragment key={index}>
-                                <hr/>
-                                <h5>{meaning.partOfSpeech}</h5>
-                                {meaning.definitions.map((definition,ind) =>
-                                    <Fragment key={ind}>
-                                        <p><b>Definition {ind+1}:</b> {definition.definition}</p>
-                                        {definition.example ? <p><b>Example:</b> <i>{definition.example}</i></p> : ""}
+                                {elem.meanings.map((meaning, index) =>
+                                    <Fragment key={index}>
+                                        {(index !== 0) ? <hr/> : ""}
+                                        <h5 className="part-of-speech-text">{meaning.partOfSpeech}</h5>
+                                        {meaning.definitions.map((definition,ind) =>
+                                            <Fragment key={ind}>
+                                                <p><b>Definition {ind+1}:</b> {definition.definition}</p>
+                                                {definition.example ? <p><b>Example:</b> <i>{definition.example}</i></p> : ""}
+                                            </Fragment>
+                                        )}
+                                        {meaning.synonyms[0] ? <p><b><i><Badge bg="success mr-4">Synonyms:</Badge></i></b><i>  {meaning.synonyms.join(", ")}</i></p>
+                                            : <p><b><i><Badge bg="danger mr-2">Synonyms:</Badge></i></b><i>  Not found</i></p>}
+                                        {meaning.antonyms[0] ? <p><b><i><Badge bg="success mr-4">Antonyms:</Badge></i></b><i>  {meaning.antonyms.join(", ")}</i></p>
+                                            : <p><b><i><Badge bg="danger mr-2">Antonyms:</Badge></i></b><i>  Not found</i></p>}
                                     </Fragment>
                                 )}
-                                {meaning.synonyms[0] ? <p><b><i><Badge bg="success mr-4">Synonyms:</Badge></i></b><i>  {meaning.synonyms.join(", ")}</i></p>
-                                    : <p><b><i><Badge bg="danger mr-2">Synonyms:</Badge></i></b><i>  Not found</i></p>}
-                                {meaning.antonyms[0] ? <p><b><i><Badge bg="success mr-4">Antonyms:</Badge></i></b><i>  {meaning.antonyms.join(", ")}</i></p>
-                                    : <p><b><i><Badge bg="danger mr-2">Antonyms:</Badge></i></b><i>  Not found</i></p>}
                             </Fragment>
                         )}
-                    </Fragment>
-                )}
+                    </Container>
+                </div>
+
             </Container>
         </main>
     ) : "";
