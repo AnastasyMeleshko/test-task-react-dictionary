@@ -2,7 +2,8 @@ footer {
     width: 100%;
     flex-shrink: 0;
     position: absolute;
-    bottom: 0;
+    bottom: -280px;
+    height: fit-content;
 }
 
 .footer-main {

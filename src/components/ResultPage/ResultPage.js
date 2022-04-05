@@ -68,7 +68,7 @@ const ResultPage = () => {
                             <Fragment key={index}>
                                 {elem.meanings.map((meaning, index) =>
                                     <Fragment key={index}>
-                                        {(index !== 0) ? <hr/> : ""}
+                                        {/*{(index !== 0) ? <hr/> : ""}*/}
                                         <h5 className="part-of-speech-text">{meaning.partOfSpeech}</h5>
                                         {meaning.definitions.map((definition,ind) =>
                                             <Fragment key={ind}>

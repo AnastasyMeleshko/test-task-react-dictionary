@@ -19,7 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
+  /*position: relative;*/
 }
 
 a {
@@ -28,6 +28,7 @@ a {
 
 .main-container {
   padding-bottom: 20px;
+  position: relative;
 }
 
 @media (max-width: 480px) {
