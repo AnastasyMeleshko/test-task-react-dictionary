@@ -1,8 +1,6 @@
 footer {
     width: 100%;
     flex-shrink: 0;
-    position: absolute;
-    bottom: 0;
     height: fit-content;
 }
 

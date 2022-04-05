@@ -8,7 +8,10 @@ const Footer = () => {
         <footer className="text-white py-4 footer-main">
             <Container fluid="md sm">
                 <p className="d-flex justify-content-center text-xs-center">
-                    &copy; {new Date().getFullYear()} Anastasya Meleshko &#10084;
+                    &copy; {new Date().getFullYear()} &#10084;
+                </p>
+                <p className="d-flex justify-content-center text-xs-center">
+                   Anastasya Meleshko
                 </p>
                 <ul className="d-flex justify-content-around list-unstyled col-lg-1 col-md-2 mx-auto">
                     <li className="d-flex justify-content-between social-icon ">
