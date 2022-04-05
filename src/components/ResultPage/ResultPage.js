@@ -20,7 +20,6 @@ const ResultPage = () => {
             setTimeout(() => {
                 setLoading(false);
             }, 1000);
-            console.log(response.data);
         } catch (e) {
             console.dir(e);
             setTimeout(() => {
