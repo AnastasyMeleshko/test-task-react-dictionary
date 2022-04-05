@@ -2,7 +2,7 @@ footer {
     width: 100%;
     flex-shrink: 0;
     position: absolute;
-    bottom: -280px;
+    bottom: 0;
     height: fit-content;
 }
 
