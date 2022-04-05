@@ -1,0 +1,42 @@
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.word-text {
+    font-size: 1.2em;
+}
+
+.scroll-results {
+    height: 400px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #C1C1C1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 8px;
+    background-color: #2265c4;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 9em;
+    border: 1px solid  #273a85;
+}
+
+.search-wrap {
+    margin: 0 auto;
+}
+
+.part-of-speech-text {
+    background-color: #ffc10747;
+    text-align: center;
+    padding: 5px 0;
+}

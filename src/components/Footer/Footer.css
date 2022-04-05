@@ -1,0 +1,18 @@
+footer {
+    width: 100%;
+    flex-shrink: 0;
+    height: fit-content;
+}
+
+.footer-main {
+    background-color: #2b518a;
+}
+
+.social-icon a {
+    color: #ffffff;
+}
+
+svg {
+    height: 20px;
+    width: 20px;
+}
